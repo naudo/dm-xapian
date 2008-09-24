@@ -1,0 +1,91 @@
+Overview
+========
+
+I have basic copy and paste instructions below... *You may want to set the SRC bash variable*
+The same instructions with extra text around them are here: http://xapian.org/docs/install.html
+
+If you received the following error then read the approprate section, 'On OS X' or 'On Linux'
+  dm_xapian: No Ruby bindings for Xapian installed.  Please follow setup instructions.
+
+
+
+
+Everyone
+========
+
+After downloading & installing Xapian and its bindings you'll need to drop this in your plugins folder
+TODO: Complete this doc & verify drop-in functionality mentioned above
+
+
+
+
+On OS X (with Xcode so you can compile)
+=======================================
+
+  # navigate to your source director or create one with mkdir ~/src
+  SRC=~/src
+  cd $SRC
+
+  # download packages (your welcome to check for newer code but don't blame me if it doesn't work)
+  curl -O http://oligarchy.co.uk/xapian/1.0.7/xapian-core-1.0.7.tar.gz
+  curl -O http://oligarchy.co.uk/xapian/1.0.7/xapian-bindings-1.0.7.tar.gz
+
+  # uncompress the downloads
+  tar zxvf xapian-core-1.0.7.tar.gz
+  tar zxvf xapian-bindings-1.0.7.tar.gz
+
+  # compile & install xapian-core
+  cd $SRC/xapian-core-1.0.7
+  ./configure --prefix=/opt
+  make
+  sudo make install
+  
+  
+  # compile & install xapian-bindings ** the ruby goes here **
+  # You can find the Xapian API here: http://xapian.org/docs/bindings/ruby/rdocs/classes/Xapian.html
+  cd $SRC/xapian-bindings-1.0.7
+  ./configure XAPIAN_CONFIG=/opt/bin/xapian-config
+  make
+  sudo make install
+  if [ $? = 0 ];then echo;echo;echo "All set, have fun.";echo You can find the Xapian API here: http://xapian.org/docs/bindings/ruby/rdocs/classes/Xapian.html;else echo;echo;echo '\n\nSomething went wrong... try slower this time.';fi;echo;echo
+
+
+
+
+On Linux
+========
+
+  SRC=~/src
+  cd $SRC
+  wget http://oligarchy.co.uk/xapian/1.0.7/xapian-core-1.0.7.tar.gz
+  wget http://oligarchy.co.uk/xapian/1.0.7/xapian-bindings-1.0.7.tar.gz
+  
+  echo uncompressing the downloads
+  tar zxvf xapian-core-1.0.7.tar.gz
+  tar zxvf xapian-bindings-1.0.7.tar.gz
+
+  echo compile & install xapian-core
+  cd $SRC/xapian-core-1.0.7
+  ./configure --prefix=/opt
+  make
+  sudo make install
+  
+  
+  echo compile & install xapian-bindings ** the ruby goes here **
+  cd $SRC/xapian-bindings-1.0.7
+  ./configure XAPIAN_CONFIG=/opt/bin/xapian-config
+  make
+  sudo make install
+  
+  if [ $? = 0 ];then echo;echo;echo "All set, have fun.";echo You can find the Xapian API here: http://xapian.org/docs/bindings/ruby/rdocs/classes/Xapian.html;else echo;echo;echo '\n\nSomething went wrong... try slower this time.';fi;echo;echo
+
+
+
+
+On Windows
+==========
+Click: Start
+Click: Run
+No, wait...
+Save yourself time and get a Mac then follow the instructions above or at least use a VM to install on Ubuntu
+
