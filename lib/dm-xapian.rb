@@ -687,9 +687,10 @@ if defined?(Merb::Plugins)
   # 
   # end
   
-  # Merb::BootLoader.after_app_loads do
-  #   # code that can be required after the application loads
-  # end
+  Merb::BootLoader.after_app_loads do
+    # code that can be required after the application loads
+    ActsAsXapian.configure(Merb.env||'development', Merb.root)
+  end
   
   Merb::Plugins.add_rakefiles "dm-xapian/merbtasks"
 end
