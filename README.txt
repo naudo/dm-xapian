@@ -1,10 +1,11 @@
-DO NOT USE THIS YET, ITS NOT WORKING!!!
-
 CONTRIBUTORS WELCOME
 
-Currently completed about 25% of rewrite
+Currently somewhat tested, but, ahem, no spec:
 
-
+* rake xapian:update_index models="model1 model2 ..."
+* rake xapian:rebuild_index models="model1 model2 ..."
+* rake xapian:query models="model1 model2 ..." query="..."
+* tracking of models to be updated after added or updated (via rake xapian:update_index)
 
 
 dm-xapian
@@ -13,13 +14,10 @@ dm-xapian
 Merb plugin that provides use of the Ruby Xapian search engine library.
 
 
-
 Setup
 =====
 
 For setup instructions read through SETUP.txt, its short and tells you where to get what else you need and what to do with it.
-
-
 
 
 Xapian
@@ -36,11 +34,22 @@ The latest stable version is 1.0.7, released on 2008-07-15.
 http://xapian.org/
 
 
-
-
 Xapian Bindings for Ruby
 ========================
 The Ruby bindings for Xapian are packaged in the xapian module. 
 
 General info: http://xapian.org/docs/bindings/ruby/
 API Docs:     http://xapian.org/docs/bindings/ruby/rdocs/
+
+To Use
+======
+* install gem via "rake install"
+* add to config/init.rb:
+  dependencies "dm-xapian"
+* Add to each model:
+  is_indexed :texts => [ :name, :region, :country, :varietal ],
+     :values => [[:price, 0, "price", :float], [:ean, 1, "ean", :string]],
+     :terms => [ [ :winery, 'W', "winery" ] ]
+  
+  * Terms are global across all models
+  * texts, values and terms based on properties
