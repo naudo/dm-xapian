@@ -46,6 +46,8 @@ To Use
 * install gem via "rake install"
 * add to config/init.rb:
   dependencies "dm-xapian"
+* add the dm-xapian models to the database:
+  rake dm:automigrate
 * Add to each model:
   is_indexed :texts => [ :name, :region, :country, :varietal ],
      :values => [[:price, 0, "price", :float], [:ean, 1, "ean", :string]],
