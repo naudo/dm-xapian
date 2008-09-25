@@ -311,7 +311,7 @@ module ActsAsXapian
             for cls, ids in lhash
                 # conditions = [ "#{cls.constantize.table_name}.#{cls.constantize.primary_key} in (?)", ids ]
                 # found = cls.constantize.find(:all, :conditions => conditions, :include => cls.constantize.xapian_options[:eager_load])
-                found = cls.constantize.all(:id.in => ids)
+                found = Object.full_const_get(cls).all(:id.in => ids)
                 for f in found
                     chash[[cls, f.id]] = f
                 end
@@ -346,7 +346,7 @@ module ActsAsXapian
             model_classes = [model_classes] if model_classes.class != Array
             for model_class in model_classes:
                 raise "pass in the model class itself, or a string containing its name" if model_class.class != Class && model_class.class != String
-                model_class = model_class.constantize if model_class.class == String
+                  model_class = Object.full_const_get(model_class) if model_class.class == String
                 new_model_classes.push(model_class)
             end
             model_classes = new_model_classes
@@ -469,11 +469,11 @@ module ActsAsXapian
                     STDOUT.puts("ActsAsXapian.update_index #{job.action} #{job.model_class} #{job.model_id.to_s}") if verbose
                     if job.action == 'update'
                         # XXX Index functions may reference other models, so we could eager load here too?
-                        model = job.model_class.constantize.first(:id => job.model_id) # :include => cls.constantize.xapian_options[:include]
+                        model = Object.full_const_get(job.model_class).first(:id => job.model_id) # :include => cls.constantize.xapian_options[:include]
                         model.xapian_index
                     elsif job.action == 'destroy'
                         # Make dummy model with right id, just for destruction
-                        model = job.model_class.constantize.new
+                        model = Object.full_const_get(job.model_class).new
                         model.id = job.model_id
                         model.xapian_destroy
                     else
@@ -569,7 +569,6 @@ module DataMapper
       self.xapian_options = options
       
       self.after :save do
-        debugger
         model_class = self.class.to_s
         model_id = self.id
         # TODO: transaction
