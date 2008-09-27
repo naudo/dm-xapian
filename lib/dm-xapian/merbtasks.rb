@@ -20,6 +20,10 @@ namespace :xapian do
   # print model name as it is run.
   desc 'Completely rebuilds Xapian search index (must specify all models)'
   task(:rebuild_index => [:merb_env]) do
+    require 'ruby-debug'
+    Debugger.start
+    Debugger.settings[:autoeval] = true if Debugger.respond_to?(:settings)
+
     raise "specify ALL your models with models=\"ModelName1 ModelName2\" as parameter" if ENV['models'].nil?
     ActsAsXapian.configure(Merb.env||'development', Merb.root)
     ActsAsXapian.rebuild_index(ENV['models'].split(" ").map{|m| m.constantize}, ENV['verbose'] ? true : false)

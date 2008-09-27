@@ -565,11 +565,11 @@ module DataMapper
     def is_indexed(options)
       cattr_accessor :xapian_options
 
-      ActsAsXapian.set_options(self.class.to_s, options)
+      ActsAsXapian.set_options(self.to_s, options)
       self.xapian_options = options
       
       self.after :save do
-        model_class = self.class.to_s
+        model_class = self.to_s
         model_id = self.id
         # TODO: transaction
         # ActiveRecord::Base.transaction do
@@ -581,7 +581,7 @@ module DataMapper
 
       self.after :destroy do
         :xapian_mark_needs_destroy
-        model = self.class.to_s
+        model = self.to_s
         model_id = self.id
         # TODO: transaction
         # ActiveRecord::Base.transaction do
