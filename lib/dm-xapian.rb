@@ -272,6 +272,10 @@ module ActsAsXapian
             self.matches.matches_estimated
         end
 
+        def estimate_is_exact
+            self.matches.estimate_is_exact
+        end
+        
         # Return query string with spelling correction
         def spelling_correction
             correction = ActsAsXapian.query_parser.get_corrected_query_string
@@ -581,11 +585,11 @@ module DataMapper
 
       self.after :destroy do
         :xapian_mark_needs_destroy
-        model = self.to_s
+        model_class = self.to_s
         model_id = self.id
         # TODO: transaction
         # ActiveRecord::Base.transaction do
-            found = ::ActsAsXapian::ActsAsXapianJob.all(:model => model, :model_id => model_id).destroy!
+            found = ::ActsAsXapian::ActsAsXapianJob.all(:model_class => model_class, :model_id => model_id).destroy!
             job = ::ActsAsXapian::ActsAsXapianJob.create(:model_class => model_class, :model_id => model_id, :action => "destroy")
         # end
       end

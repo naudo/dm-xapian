@@ -36,7 +36,8 @@ end
 
 desc "install the plugin locally"
 task :install => [:package] do
-  sh %{#{sudo} gem install #{install_home} pkg/#{NAME}-#{GEM_VERSION} --no-update-sources}
+  Merb::RakeHelper.install(NAME, :version => GEM_VERSION)
+  # sudo "gem install #{install_home} pkg/#{NAME}-#{GEM_VERSION} --no-update-sources"
 end
 
 desc "create a gemspec file"
@@ -50,7 +51,7 @@ namespace :jruby do
 
   desc "Run :package and install the resulting .gem with jruby"
   task :install => :package do
-    sh %{#{sudo} jruby -S gem install #{install_home} pkg/#{NAME}-#{GEM_VERSION}.gem --no-rdoc --no-ri}
+    sudo "jruby -S gem install #{install_home} pkg/#{NAME}-#{GEM_VERSION}.gem --no-rdoc --no-ri"
   end
 
 end
