@@ -588,7 +588,7 @@ module DataMapper
 
       self.after :destroy do
         :xapian_mark_needs_destroy
-        model_class = self.to_s
+        model_class = self.class.to_s
         model_id = self.id
         # TODO: transaction
         # ActiveRecord::Base.transaction do
