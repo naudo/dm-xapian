@@ -4,9 +4,9 @@ namespace :xapian do
   # "verbose=true" to print model name as it is run.
   desc 'Updates Xapian search index with changes to models since last call'
   task(:update_index => [:merb_env]) do
-    require 'ruby-debug'
-    Debugger.start
-    Debugger.settings[:autoeval] = true if Debugger.respond_to?(:settings)
+    # require 'ruby-debug'
+    # Debugger.start
+    # Debugger.settings[:autoeval] = true if Debugger.respond_to?(:settings)
 
     ActsAsXapian.configure(Merb.env||'development', Merb.root)
     ActsAsXapian.update_index(ENV['flush'] ? true : false, ENV['verbose'] ? true : false)
@@ -20,9 +20,9 @@ namespace :xapian do
   # print model name as it is run.
   desc 'Completely rebuilds Xapian search index (must specify all models)'
   task(:rebuild_index => [:merb_env]) do
-    require 'ruby-debug'
-    Debugger.start
-    Debugger.settings[:autoeval] = true if Debugger.respond_to?(:settings)
+    # require 'ruby-debug'
+    # Debugger.start
+    # Debugger.settings[:autoeval] = true if Debugger.respond_to?(:settings)
 
     raise "specify ALL your models with models=\"ModelName1 ModelName2\" as parameter" if ENV['models'].nil?
     ActsAsXapian.configure(Merb.env||'development', Merb.root)
