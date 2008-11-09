@@ -26,7 +26,21 @@ namespace :xapian do
 
     raise "specify ALL your models with models=\"ModelName1 ModelName2\" as parameter" if ENV['models'].nil?
     ActsAsXapian.configure(Merb.env||'development', Merb.root)
-    ActsAsXapian.rebuild_index(ENV['models'].split(" ").map{|m| m.constantize}, ENV['verbose'] ? true : false)
+    # Transform the array of model strings into an array of resource classes
+    # Only retain resources which have been indexed by Xapian
+    indexed_models = DataMapper::Resource.descendants.select { |m| m.include?(DataMapper::Xapian::InstanceMethods) }
+    models_for_rebuild = []
+    found_models = nil
+    ENV['models'].split(" ").each do |m_name|
+       found_models = indexed_models.select { |m| m.name == m_name }
+       unless found_models.empty? 
+         models_for_rebuild << found_models.first
+       else
+         raise "The model name #{m_name} is either unknown to " +
+           "DataMapper or not indexed by Xapian"
+       end
+    end
+    ActsAsXapian.rebuild_index(models_for_rebuild, ENV['verbose'] ? true : false)
   end
 
   # Parameters - are models, query, offset, limit, sort_by_prefix,
@@ -36,7 +50,7 @@ namespace :xapian do
     ActsAsXapian.configure(Merb.env||'development', Merb.root)
     raise "specify models=\"ModelName1 ModelName2\" as parameter" if ENV['models'].nil?
     raise "specify query=\"your terms\" as parameter" if ENV['query'].nil?
-    s = ActsAsXapian::Search.new(ENV['models'].split(" ").map{|m| m.constantize}, 
+    s = ActsAsXapian::Search.new(ENV['models'].split(" "), 
         ENV['query'],
         :offset => (ENV['offset'] || 0), :limit => (ENV['limit'] || 10),
         :sort_by_prefix => (ENV['sort_by_prefix'] || nil), 

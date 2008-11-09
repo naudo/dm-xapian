@@ -1,0 +1,3 @@
+* 2008-11-08
+- applied patch from Emmanuel Surleau: make the rake tasks work with merb 0.9.13 (should also work with 1.0, I assume, but I haven't upgraded yet). In addition, rebuild_index complains in an explicit way when a class name is not a model or indexed by Xapian
+

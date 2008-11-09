@@ -18,7 +18,7 @@ spec = Gem::Specification.new do |s|
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = true
-  s.extra_rdoc_files = ["README.txt", "LICENSE", 'TODO', 'SETUP.txt']
+  s.extra_rdoc_files = ["README.txt", "LICENSE", 'TODO', 'SETUP.txt', 'CHANGES.txt']
   s.summary = SUMMARY
   s.description = s.summary
   s.author = AUTHOR
@@ -26,7 +26,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = HOMEPAGE
   s.add_dependency('merb', '>= 0.9.7')
   s.require_path = 'lib'
-  s.files = %w(LICENSE README.txt Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
+  s.files = %w(LICENSE README.txt Rakefile TODO CHANGES.txt SETUP.txt) + Dir.glob("{lib,spec}/**/*")
   
 end
 
