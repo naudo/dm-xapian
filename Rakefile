@@ -6,7 +6,7 @@ require 'merb-core/version'
 require 'merb-core/tasks/merb_rake_helper'
 
 NAME = "dm-xapian"
-GEM_VERSION = "0.1"
+GEM_VERSION = "0.3"
 AUTHOR = "Joshaven Potter, Pascal Belloncle"
 EMAIL = "yourtech@gmail.com, psq@nanorails.com"
 HOMEPAGE = "http://github.com/psq/dm-xapian"
