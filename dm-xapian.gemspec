@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.homepage = %q{http://github.com/psq/dm-xapian}
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{merb}
+  s.rubyforge_project = %q{dm-xapian}
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Merb plugin that provides indexing of datamapper models using the Ruby Xapian search engine library}
   s.executables = ['dm-xapian-updater']
