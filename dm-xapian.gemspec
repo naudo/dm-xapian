@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{dm-xapian}
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshaven Potter, Pascal Belloncle"]
@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/psq/dm-xapian}
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{merb}
-  s.rubygems_version = %q{1.2.0}
-  s.summary = %q{Merb plugin that provides indexing of datamapper mdoles using the Ruby Xapian search engine library}
+  s.rubygems_version = %q{1.3.1}
+  s.summary = %q{Merb plugin that provides indexing of datamapper models using the Ruby Xapian search engine library}
   s.executables = ['dm-xapian-updater']
   
   if s.respond_to? :specification_version then
