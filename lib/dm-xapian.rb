@@ -85,7 +85,7 @@ module ActsAsXapian
       return unless @@db_path.nil?
 
       # barf if we can't figure out the environment
-      raise "Set RAILS_ENV, so acts_as_xapian can find the right Xapian database" if not @@environment
+      raise "Can't figure out environment, so acts_as_xapian can find the right Xapian database" if not @@environment
 
       # check for a config file
       config_file = @@root + "/config/xapian.yml"

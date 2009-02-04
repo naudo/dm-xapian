@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+# script/task_server_control.rb
+#
+# Background Task Server Control - A daemon for running jobs
+#
+
+require 'rubygems'
+require 'daemons'
+require 'merb-core'
+require 'dm-core'
+require 'dm-xapian'
+
+ROOT = Dir.pwd
+options = {}
+
+default_pid_dir = ROOT+"/tmp/pids"
+
+if File.exists?(default_pid_dir)
+  options[:dir_mode] = :normal
+  options[:dir] = default_pid_dir
+  options[:log_output] = true
+end
+
+ARGV.options do |opts|
+  opts.on( "-e", "--environment ENVIRONMENT", String, "The Environment to run under." ) do |environment|
+    Merb.environment = environment
+  end
+  opts.parse!
+end
+
+Merb.environment ||= ENV["MERB_ENV"]
+
+if Merb.environment == "development" or Merb.environment == "test"
+  SLEEP_TIME = 5
+else
+  SLEEP_TIME = 60
+end
+
+Merb.start_environment(:environment => Merb.environment)
+ActsAsXapian.configure(Merb.environment, ROOT)
+ActsAsXapian.update_index(true, true) # need to call before starting daemon???
+
+Daemons.run_proc('server.rb', options) do
+
+  loop do
+    puts "Updating index for #{Merb.environment}"
+    ActsAsXapian.update_index(true, true)
+    sleep(SLEEP_TIME)
+  end
+
+end
