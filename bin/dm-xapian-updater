@@ -40,7 +40,7 @@ Merb.start_environment(:environment => Merb.environment)
 ActsAsXapian.configure(Merb.environment, ROOT)
 ActsAsXapian.update_index(true, true) # need to call before starting daemon???
 
-Daemons.run_proc('server.rb', options) do
+Daemons.run_proc('dm-xapian-updater.rb', options) do
 
   loop do
     puts "Updating index for #{Merb.environment}"
