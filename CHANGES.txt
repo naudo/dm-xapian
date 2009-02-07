@@ -1,4 +1,7 @@
-* 2009-02-03
+* 2009-02-06 - 0.5
+- added remove_accents to make searches work regardless of accents (probably should be an option, though)
+
+* 2009-02-03 - 0.4
 - dm-xapian-update daemon to keep the index up to date
 
 * 2008-11-08

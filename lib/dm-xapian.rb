@@ -19,6 +19,7 @@ rescue LoadError
     STDERR.puts "acts_as_xapian: No Ruby bindings for Xapian installed" 
     $acts_as_xapian_bindings_available = false
 end
+require 'remove_accents'
 
 module ActsAsXapian
     ######################################################################
@@ -362,7 +363,7 @@ module ActsAsXapian
             self.initialize_db
 
             # Case of a string, searching for a Google-like syntax query
-            self.query_string = query_string
+            self.query_string = query_string.remove_accents
 
             # Construct query which only finds things from specified models
             model_query = Xapian::Query.new(Xapian::Query::OP_OR, model_classes.map{|mc| "M" + mc.to_s})
@@ -621,7 +622,7 @@ module DataMapper
           elsif type == :boolean
               value ? true : false
           else
-              value.to_s
+              value.to_s.remove_accents
           end
       end
 
