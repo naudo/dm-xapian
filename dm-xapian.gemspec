@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{dm-xapian}
-  s.version = "0.5.0"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshaven Potter, Pascal Belloncle"]
@@ -22,14 +22,14 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if current_version >= 3 then
-      s.add_runtime_dependency(%q<merb>, [">= 0.9.7"])
-      s.add_runtime_dependency(%q<dm-core>, [">= 0.9.6"])
+      s.add_runtime_dependency(%q<rails>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<dm-core>, [">= 1.0.0"])
     else
-      s.add_dependency(%q<merb>, [">= 0.9.7"])
-      s.add_dependency(%q<dm-core>, [">= 0.9.6"])
+      s.add_dependency(%q<rails>, [">= 3.0.0"])
+      s.add_dependency(%q<dm-core>, [">= 1.0.0"])
     end
   else
-    s.add_dependency(%q<merb>, [">= 0.9.7"])
-    s.add_dependency(%q<dm-core>, [">= 0.9.6"])
+    s.add_dependency(%q<rails>, [">= 3.0.0"])
+    s.add_dependency(%q<dm-core>, [">= 1.0.0"])
   end
 end
