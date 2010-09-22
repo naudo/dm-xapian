@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = %q{Merb plugin that provides access to the Ruby Xapian search engine library}
   s.email = %q{yourtech@gmail.com, psq@nanorails.com}
   s.extra_rdoc_files = ["README.txt", "LICENSE", "TODO", "SETUP.txt", "CHANGES.txt"]
-  s.files = ["LICENSE", "README.txt", "Rakefile", "TODO", "lib/dm-xapian.rb", "lib/dm-xapian/merbtasks.rb", "lib/remove_accents.rb", "SETUP.txt", "CHANGES.txt", "bin/dm-xapian-updater"]
+  s.files = ["LICENSE", "README.txt", "Rakefile", "TODO", "lib/dm-xapian.rb", "lib/remove_accents.rb", "SETUP.txt", "CHANGES.txt", "bin/dm-xapian-updater"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/psq/dm-xapian}
   s.require_paths = ["lib"]
