@@ -453,7 +453,7 @@ module ActsAsXapian
     # using "script/generate acts_as_xapian" as described in ../README.txt
     class ActsAsXapianJob
       include ::DataMapper::Resource
-      property :id, Integer, :serial => true
+      property :id, Serial
       property :model_class, String
       property :model_id, Integer
       property :action, String
